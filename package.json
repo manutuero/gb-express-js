@@ -27,14 +27,14 @@
   ],
   "main": "app.js",
   "author": "Wolox",
-  "homepage": "https://github.com/manueltuero/gb-express.git",
+  "homepage": "https://github.com/manutuero/gb-express-js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/manueltuero/gb-express.git.git"
+    "url": "https://github.com/manutuero/gb-express-js.git"
   },
   "bugs": {
-    "url": "https://github.com/manueltuero/gb-express.git/issues",
+    "url": "https://github.com/manutuero/gb-express-js/issues",
     "email": "tls@wolox.com.ar"
   },
   "jest": {
