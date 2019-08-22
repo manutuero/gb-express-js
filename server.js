@@ -6,7 +6,7 @@ const app = require('./app'),
 const port = config.common.api.port || 8080;
 
 Promise.resolve()
- // .then(() => migrationsManager.check())
+  .then(() => migrationsManager.check())
   .then(() => {
     app.listen(port);
 
