@@ -23,4 +23,3 @@ exports.getIdAlbumPhotos = (req, res1) => {
     return res1.status(res.statusCode).send(filteredAlbums);
   });
 };
-
