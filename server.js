@@ -1,6 +1,7 @@
 const app = require('./app');
 // migrationsManager = require('./migrations'),
-(config = require('./config')), (logger = require('./app/logger'));
+const config = require('./config');
+const logger = require('express-wolox-logger');
 
 const port = config.common.api.port || 8080;
 
