@@ -11,11 +11,19 @@ exports.getAlbums = (_, res, next) =>
       logger.error(err.message);
       return next();
     });
-exports.getPhotosByAlbumId = (req, res) => {
-  albums.getIdAlbumPhotos(req.params.id).then(response => {
-    if (parseInt(response.length)) {
-      return res.status(200).send(response);
-    }
-    return res.status(404).send();
-  });
+exports.getPhotosByAlbumId = (req, res, next) => {
+  albums
+    .getIdAlbumPhotos(req.params.id)
+    .then(response => {
+      if (parseInt(response.length)) {
+        logger.info(JSON.stringify(response));
+
+        return res.status(200).send(response);
+      }
+      return next();
+    })
+    .catch(err => {
+      logger.error(err.message);
+      return next();
+    });
 };
