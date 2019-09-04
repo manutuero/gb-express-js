@@ -5,7 +5,7 @@ exports.getAlbums = (_, res, next) =>
   albums
     .getAlbums()
     .then(json => {
-      console.log('Albums were fetched from external api');
+      logger.info('Albums were fetched from external api');
       res.status(200).send(JSON.parse(json));
     })
     .catch(err => {
