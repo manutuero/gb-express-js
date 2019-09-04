@@ -18,7 +18,7 @@ exports.getPhotosByAlbumId = (req, res, next) => {
     .getIdAlbumPhotos(req.params.id)
     .then(response => {
       const albumsById = JSON.parse(response);
-      if (parseInt(albumsById.length) > 0 && albumsById !== undefined) {
+      if (albumsById.length > 0 && albumsById) {
         logger.info(`Get albums Id returned : ${albumsById.length} objects`);
 
         return res.status(200).send(albumsById);
