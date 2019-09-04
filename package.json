@@ -61,6 +61,8 @@
     "jwt-simple": "^0.5.1",
     "node-fetch": "^2.6.0",
     "pg": "^7.4.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "sequelize": "^4.34.0",
     "umzug": "^2.1.0"
   },

@@ -1,29 +1,33 @@
 const albums = require('../services/albums');
 const logger = require('../../app/logger');
+const errors = require('../errors');
 exports.getAlbums = (_, res, next) =>
   albums
     .getAlbums()
     .then(json => {
-      logger.info(JSON.stringify(json));
-      return res.status(200).send(json);
+      console.log('Albums were fetched from external api');
+      res.status(200).send(JSON.parse(json));
     })
     .catch(err => {
-      logger.error(err.message);
-      return next();
+      logger.error('There was an error retrieving albums from external api');
+      return next(err);
     });
+
 exports.getPhotosByAlbumId = (req, res, next) => {
   albums
     .getIdAlbumPhotos(req.params.id)
     .then(response => {
-      if (parseInt(response.length)) {
-        logger.info(JSON.stringify(response));
+      const albumsById = JSON.parse(response);
+      if (parseInt(albumsById.length) > 0 && albumsById !== undefined) {
+        logger.info(`Get albums Id returned : ${albumsById.length} objects`);
 
-        return res.status(200).send(response);
+        return res.status(200).send(albumsById);
       }
-      return next();
+      logger.error('Get albums Id returned empty');
+      throw errors.not_found_error(`No album found with id: ${req.params.id}`);
     })
     .catch(err => {
-      logger.error(err.message);
-      return next();
+      logger.error('There was an error retrieving photos from external api');
+      return next(err);
     });
 };
