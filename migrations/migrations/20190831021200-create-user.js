@@ -11,12 +11,14 @@ module.exports = {
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
-        notEmpty: true
+        notEmpty: true,
+        field: 'first_name'
       },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
-        notEmpty: true
+        notEmpty: true,
+        field: 'last_name'
       },
       password: {
         type: Sequelize.STRING,
@@ -32,11 +34,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'created_at'
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'updated_at'
       }
     }),
   // eslint-disable-next-line no-unused-vars
