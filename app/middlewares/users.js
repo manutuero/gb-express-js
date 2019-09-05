@@ -1,5 +1,6 @@
 const { check, validationResult } = require('express-validator');
 const db = require('../models');
+const logger = require('../logger');
 exports.checks = [
   check('email')
     .isEmail()
@@ -25,6 +26,7 @@ exports.checks = [
 exports.validateChecks = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    logger.error('User was not created. At least one field validation failed.');
     return res.status(422).json({ errors: errors.array() });
   }
   return next();
