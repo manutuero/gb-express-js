@@ -13,6 +13,5 @@ module.exports = (sequelize, DataTypes) => {
   // user.associate = models => {
   // associations can be defined here
   // };
-
   return user;
 };

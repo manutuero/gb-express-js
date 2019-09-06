@@ -1,7 +1,8 @@
+const bcrypt = require('bcrypt');
+
 const logger = require('../../app/logger');
 const db = require('../models');
 const errors = require('../errors');
-const bcrypt = require('bcrypt');
 exports.createUser = (req, res, next) => {
   const query = req.body;
   const salt = bcrypt.genSaltSync(10);
