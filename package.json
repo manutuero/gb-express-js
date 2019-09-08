@@ -21,7 +21,7 @@
     "prestart": "npm run lint",
     "migrations": "sequelize db:migrate",
     "start": "nodemon --inspect server.js",
-    "migrations-test": "NODE_ENV=testing npm run migrations"
+    "migrations-test": "NODE_ENV=testing ./node_modules/.bin/sequelize db:drop && NODE_ENV=testing ./node_modules/.bin/sequelize db:create && NODE_ENV=testing ./node_modules/.bin/sequelize db:migrate"
   },
   "cacheDirectories": [
     "node_modules"
