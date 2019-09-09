@@ -2,6 +2,7 @@ const { healthCheck } = require('./controllers/healthCheck');
 const albumsController = require('./controllers/albums');
 const usersController = require('./controllers/users');
 const { validateChecks, checks } = require('./middlewares/users');
+
 exports.init = app => {
   app.get('/health', healthCheck);
   app.get('/albums', albumsController.getAlbums);

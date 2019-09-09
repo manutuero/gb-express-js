@@ -11,7 +11,8 @@ exports.createUser = (req, res, next) => {
   const hash = bcrypt.hashSync(newUserData.password, salt);
   newUserData.password = hash;
 
-  Promise.resolve(db.user.create(newUserData))
+  db.user
+    .create(newUserData)
     .then(createdUser => {
       logger.info(`User ${createdUser.dataValues.firstName} was created.`);
       const data = {
