@@ -4,6 +4,7 @@ const db = require('../app/models');
 const supertest = require('supertest');
 
 const request = supertest(app);
+
 describe('Post /users', () => {
   it('Create user', async done => {
     const response = await request
