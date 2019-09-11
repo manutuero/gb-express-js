@@ -3,6 +3,12 @@ const db = require('../app/models');
 
 const supertest = require('supertest');
 
+const validUser = {
+  firstName: 'TestName',
+  lastName: 'TestLastName',
+  password: '12345678Ab',
+  email: 'Test@wolox.com'
+};
 const request = supertest(app);
 describe('Post /users', () => {
   it('Create user', async done => {
@@ -10,31 +16,23 @@ describe('Post /users', () => {
       .post('/users')
       .set('Content-Type', 'application/json')
       .set('Acccept', 'application/json')
-      .send({
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        password: '12345678Ab',
-        email: 'Test@wolox.com'
-      });
+      .send(validUser);
     expect(response.status).toBe(201);
     expect(response.body).not.toBe({});
     expect(response.body.firstName).toBe('TestName');
     expect(response.body.lastName).toBe('TestLastName');
     expect(response.body.email).toBe('Test@wolox.com');
-    // expect(response.body.id).toBe();
     done();
   });
 
   it('Fails to create user, missing field', async done => {
+    const { ...invalidUser } = validUser;
+    delete invalidUser.lastName;
     const response = await request
       .post('/users')
       .set('Content-Type', 'application/json')
       .set('Acccept', 'application/json')
-      .send({
-        firstName: 'TestName',
-        password: 'TestPassword',
-        email: 'Test@wolox.com'
-      });
+      .send(invalidUser);
     expect(response.status).toBe(422);
     expect(response.body.errors[0]).toMatchObject({
       msg: 'Invalid value',
@@ -49,12 +47,7 @@ describe('Post /users', () => {
       .post('/users')
       .set('Content-Type', 'application/json')
       .set('Acccept', 'application/json')
-      .send({
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        password: '1234567',
-        email: 'Test@wolox.com'
-      });
+      .send({ ...validUser, password: '1234567' });
     expect(response.status).toBe(422);
     expect(response.body.errors[0]).toMatchObject({
       param: 'password',
@@ -65,22 +58,12 @@ describe('Post /users', () => {
   });
 
   it('Fails to create user, user already exists', async done => {
-    await db.user.create({
-      firstName: 'TestName',
-      lastName: 'TestLastName',
-      password: '1234567',
-      email: 'Test@wolox.com'
-    });
+    await db.user.create(validUser);
     const response = await request
       .post('/users')
       .set('Content-Type', 'application/json')
       .set('Acccept', 'application/json')
-      .send({
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        password: '12345678',
-        email: 'Test@wolox.com'
-      });
+      .send(validUser);
     expect(response.status).toBe(422);
     expect(response.body.errors[0]).toMatchObject({
       value: 'Test@wolox.com',
