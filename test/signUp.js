@@ -10,6 +10,7 @@ const validUser = {
   email: 'Test@wolox.com'
 };
 const request = supertest(app);
+
 describe('Post /users', () => {
   it('Create user', async done => {
     const response = await request
