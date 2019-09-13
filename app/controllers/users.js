@@ -11,20 +11,22 @@ exports.createUser = (req, res, next) => {
   const hash = bcrypt.hashSync(newUserData.password, salt);
   newUserData.password = hash;
 
-  db.user
+  return db.user
     .create(newUserData)
     .then(createdUser => {
       logger.info(`User ${createdUser.dataValues.firstName} was created.`);
       const data = {
-        id: createdUser.dataValues.id,
-        firstName: createdUser.dataValues.firstName,
-        lastName: createdUser.dataValues.lastName,
-        email: createdUser.dataValues.email
+        user: {
+          id: createdUser.dataValues.id,
+          first_name: createdUser.dataValues.firstName,
+          last_name: createdUser.dataValues.lastName,
+          email: createdUser.dataValues.email
+        }
       };
-      res.status(201).send(data);
+      return res.status(201).send(data);
     })
     .catch(err => {
       logger.error('Error inserting user in database');
-      next(errors.databaseError(err.message));
+      return next(errors.databaseError(err.message));
     });
 };

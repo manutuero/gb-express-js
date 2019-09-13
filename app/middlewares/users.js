@@ -3,24 +3,31 @@ const { check, validationResult } = require('express-validator');
 const db = require('../models');
 const logger = require('../logger');
 const errors = require('../errors');
+const paramErrors = require('../constants/errorsMessages').paramsValidations;
+const constants = require('../constants');
 exports.checks = [
   check('email')
     .isEmail()
-    .custom(email => email.includes('@wolox'))
-    .withMessage('Email must be wolox domain')
+    .withMessage(paramErrors.validEmail)
+    .custom(email => email.includes(constants.emailDomian))
+    .withMessage(paramErrors.validWoloxEmail)
     .custom(async email => {
-      // const user = ;
-      if (await db.user.findOne({ where: { email } })) {
-        throw errors.databaseError('User already exists.');
+      const user = await db.user.findOne({ where: { email } });
+      if (user) {
+        throw errors.databaseError(paramErrors.emailAlreadyExists);
       }
     }),
-  check('firstName').isLength({ min: 3 }),
-  check('lastName').isLength({ min: 3 }),
+  check('firstName')
+    .isLength({ min: constants.maxFirstNameLength })
+    .withMessage(paramErrors.firstNameLength),
+  check('lastName')
+    .isLength({ min: constants.maxLastNameLength })
+    .withMessage(paramErrors.lastNameLength),
   check('password')
-    .isLength({ min: 8 })
-    .withMessage('Password must be 8 characters long')
+    .isLength({ min: constants.maxPasswordLength })
+    .withMessage(paramErrors.passwordLength)
     .isAlphanumeric()
-    .withMessage('Password must be alphanumeric')
+    .withMessage(paramErrors.passwordAlphanumeric)
 ];
 
 exports.validateChecks = (req, res, next) => {
