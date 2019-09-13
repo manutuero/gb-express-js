@@ -20,9 +20,9 @@ describe('Post /users', () => {
       .send(validUser);
     expect(response.status).toBe(201);
     expect(response.body).not.toBe({});
-    expect(response.body.firstName).toBe('TestName');
-    expect(response.body.lastName).toBe('TestLastName');
-    expect(response.body.email).toBe('Test@wolox.com');
+    expect(response.body.firstName).toBe(validUser.firstName);
+    expect(response.body.lastName).toBe(validUser.lastName);
+    expect(response.body.email).toBe(validUser.email);
     done();
   });
 
