@@ -34,7 +34,8 @@ exports.validateChecks = (req, res, next) => {
   const errs = validationResult(req);
   if (!errs.isEmpty()) {
     logger.error('User was not created. At least one field validation failed.');
-    return res.status(422).json({ errors: errs.array() });
+    // return res.status(422).json({ errors: errs.array() });
+    return next(errors.fied_validations_failed(errs));
   }
   return next();
 };
