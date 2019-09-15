@@ -1,12 +1,14 @@
 const constants = require('../constants');
 module.exports = {
-  paramsValidations: {
-    validEmail: 'Email must ve valid.',
-    validWoloxEmail: 'Email must be wolox domain.',
-    passwordLength: 'Password must be 8 characters long at least.',
-    passwordAlphanumeric: 'Password must be alphanumeric.',
-    firstNameLength: `Field name must be ${constants.maxFirstNameLength} characters long.`,
-    lastNameLength: `Field name must be ${constants.maxLastNameLength} characters long.`,
+  paramsValidationsErrors: {
+    invalidEmail: 'Email must ve valid.',
+    invalidDomain: 'Invalid domain.',
+    passwordLengthError: 'Password length error.',
+    passwordIsNotAlphanumeric: 'Password must be alphanumeric.',
+    // eslint-disable-next-line max-len
+    firstNameLengthError: `Field first_name must be at leasat ${constants.minLastNameLength} characters long and less than ${constants.maxFirstNameLength}.`,
+    // eslint-disable-next-line max-len
+    lastNameLengthError: `Field last_name must be at least ${constants.minLastNameLength} characters long and less than ${constants.minFirstNameLength}.`,
     emailAlreadyExists: 'Email already registered.'
   },
   responseErrors: {}

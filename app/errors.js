@@ -16,7 +16,7 @@ exports.NOT_FOUND_ERROR = 'Not Found';
 exports.not_found_error = message => internalError(message, exports.NOT_FOUND_ERROR);
 
 exports.VALIDATION_ERROR = 'Field validations failed.';
-exports.fied_validations_failed = message => internalError(message, exports.VALIDATION_ERROR);
+exports.field_validations_failed = message => internalError(message, exports.VALIDATION_ERROR);
 
 exports.BAD_REQUEST = 'Bad request.';
 exports.bad_request = message => internalError(message, exports.BAD_REQUEST);
