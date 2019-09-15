@@ -7,7 +7,6 @@ const errors = require('../errors');
 const saltRounds = 10;
 exports.createUser = (req, res, next) => {
   const newUserData = req.params.user;
-  console.log(newUserData);
   const salt = bcrypt.genSaltSync(saltRounds);
   const hash = bcrypt.hashSync(newUserData.password, salt);
   newUserData.password = hash;
