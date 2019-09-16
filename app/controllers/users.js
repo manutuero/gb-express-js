@@ -1,7 +1,7 @@
 const { hashPassword } = require('../helpers');
 const { serializeCreatedUser } = require('../serializers/users');
 const logger = require('../../app/logger');
-const db = require('../models');
+const userDb = require('../services/database/users');
 const errors = require('../errors');
 
 exports.createUser = (req, res, next) => {
@@ -9,8 +9,8 @@ exports.createUser = (req, res, next) => {
 
   newUserData.password = hashPassword(newUserData.password);
 
-  return db.user
-    .create(newUserData)
+  return userDb
+    .createUser(newUserData)
     .then(createdUser => {
       logger.info(`User ${createdUser.dataValues.firstName} was created.`);
       const serializedUser = serializeCreatedUser(createdUser);
