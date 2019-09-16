@@ -12,7 +12,7 @@ exports.createUser = (req, res, next) => {
     .userNotExists(newUserData)
     .then(user => {
       if (user) {
-        throw errors.field_validations_failed(paramsValidationsErrors.emailAlreadyExists);
+        throw errors.field_validations_failed([paramsValidationsErrors.emailAlreadyExists]);
       }
       return userDb.createUser(newUserData);
     })
