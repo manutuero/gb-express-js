@@ -55,7 +55,7 @@ describe('Post /users', () => {
     done();
   });
 
-  it.only('Fails to create user, user already exists', async done => {
+  it('Fails to create user, user already exists', async done => {
     await db.user.create(validUser);
     const response = await request
       .post('/users')
