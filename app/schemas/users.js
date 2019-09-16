@@ -8,7 +8,7 @@ exports.signUp = {
     exists: true,
     errorMessage: paramsValidationsErrors.invalidEmail,
     custom: {
-      options: email => email.includes(constants.emailDomian),
+      options: email => email.includes(constants.EMAIL_DOMAIN),
       errorMessage: paramsValidationsErrors.invalidDomain
     }
   },
@@ -16,7 +16,7 @@ exports.signUp = {
     in: ['body'],
     exists: true,
     isLength: {
-      options: { min: constants.minFirstNameLength, max: constants.maxFirstNameLength },
+      options: { min: constants.MIN_FIRST_NAME_LENGTH, max: constants.MAX_FIRST_NAME_LENGTH },
       errorMessage: paramsValidationsErrors.firstNameLengthError
     }
   },
@@ -24,7 +24,7 @@ exports.signUp = {
     in: ['body'],
     exists: true,
     isLength: {
-      options: { min: constants.minLastNameLength, max: constants.maxLastNameLength },
+      options: { min: constants.MIN_LAST_NAME_LENGTH, max: constants.MAX_LAST_NAME_LENGTH },
       errorMessage: paramsValidationsErrors.lastNameLengthError
     }
   },
@@ -32,7 +32,7 @@ exports.signUp = {
     in: ['body'],
     exists: true,
     isLength: {
-      options: { max: 50, min: 8 },
+      options: { max: constants.MAX_PASSWORD_LENGTH, min: constants.MIN_PASSWORD_LENGTH },
       errorMessage: paramsValidationsErrors.passwordLengthError
     },
     isAlphanumeric: true,
