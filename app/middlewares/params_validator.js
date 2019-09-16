@@ -1,6 +1,7 @@
 const { checkSchema, validationResult } = require('express-validator/check');
 const logger = require('../logger');
 const errors = require('../errors');
+const { serializeErrorSignUp } = require('../serializers/users');
 
 // eslint-disable-next-line no-unused-vars
 const checkValidationResult = (request, response, next) => {
@@ -8,7 +9,9 @@ const checkValidationResult = (request, response, next) => {
   const errorsResult = validationResult(request);
   if (!errorsResult.isEmpty()) {
     return next(
-      errors.field_validations_failed(errorsResult.array({ onlyFirstError: true }).map(e => e.msg))
+      errors.field_validations_failed(
+        errorsResult.array({ onlyFirstError: true }).map(e => serializeErrorSignUp(e))
+      )
     );
   }
   return next();

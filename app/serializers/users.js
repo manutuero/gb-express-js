@@ -9,3 +9,8 @@ exports.serializeCreatedUser = createdUser => {
   };
   return serializedUser;
 };
+
+exports.serializeErrorSignUp = error => ({
+  message: error.msg,
+  param: error.param
+});
