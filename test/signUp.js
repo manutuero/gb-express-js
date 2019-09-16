@@ -37,7 +37,9 @@ describe('Post /users', () => {
       .send(invalidUser);
     expect(response.status).toBe(400);
     expect(response.body.message.length).toBe(1);
-    expect(response.body.message[0]).toBe('Invalid value');
+    // expect(response.body.message).toBeType('array');
+    expect(response.body.message[0].message).toBe('Invalid value');
+    expect(response.body.message[0].param).toBe('last_name');
     expect(response.body.internal_code).toBe(errors.VALIDATION_ERROR);
     done();
   });
@@ -50,7 +52,7 @@ describe('Post /users', () => {
       .send({ ...validUser, password: '1234567' });
     expect(response.status).toBe(400);
     expect(response.body.message.length).toBe(1);
-    expect(response.body.message[0]).toBe(paramsValidationsErrors.passwordLengthError);
+    expect(response.body.message[0].message).toBe(paramsValidationsErrors.passwordLengthError);
     expect(response.body.internal_code).toBe(errors.VALIDATION_ERROR);
     done();
   });
