@@ -1,29 +1,25 @@
-const bcrypt = require('bcrypt');
-
+const { serializeCreatedUser } = require('../serializers/users');
+const { mapUserCreateRequest } = require('../mappers/user');
 const logger = require('../../app/logger');
-const db = require('../models');
+const userDb = require('../services/database/users');
 const errors = require('../errors');
+const { paramsValidationsErrors } = require('../constants/errorsMessages');
 
-const saltRounds = 10;
 exports.createUser = (req, res, next) => {
-  const newUserData = req.body;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const hash = bcrypt.hashSync(newUserData.password, salt);
-  newUserData.password = hash;
+  const newUserData = mapUserCreateRequest(req.body);
 
-  Promise.resolve(db.user.create(newUserData))
+  return userDb
+    .userNotExists(newUserData)
+    .then(user => {
+      if (user) {
+        throw errors.field_validations_failed(paramsValidationsErrors.emailAlreadyExists);
+      }
+      return userDb.createUser(newUserData);
+    })
     .then(createdUser => {
       logger.info(`User ${createdUser.dataValues.firstName} was created.`);
-      const data = {
-        id: createdUser.dataValues.id,
-        firstName: createdUser.dataValues.firstName,
-        lastName: createdUser.dataValues.lastName,
-        email: createdUser.dataValues.email
-      };
-      res.status(201).send(data);
+      const serializedUser = serializeCreatedUser(createdUser);
+      return res.status(201).send(serializedUser);
     })
-    .catch(err => {
-      logger.error('Error inserting user in database');
-      next(errors.databaseError(err.message));
-    });
+    .catch(next);
 };
