@@ -1,4 +1,3 @@
-const { hashPassword } = require('../helpers');
 const { serializeCreatedUser } = require('../serializers/users');
 const { mapUserCreateRequest } = require('../mappers/user');
 const logger = require('../../app/logger');
@@ -8,7 +7,7 @@ const { paramsValidationsErrors } = require('../constants/errorsMessages');
 
 exports.createUser = (req, res, next) => {
   const newUserData = mapUserCreateRequest(req.body);
-  newUserData.password = hashPassword(newUserData.password);
+
   return userDb
     .userNotExists(newUserData)
     .then(user => {
