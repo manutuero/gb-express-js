@@ -6,9 +6,9 @@ module.exports = {
     passwordLengthError: 'Password length error.',
     passwordIsNotAlphanumeric: 'Password must be alphanumeric.',
     // eslint-disable-next-line max-len
-    firstNameLengthError: `Field first_name must be at leasat ${constants.minLastNameLength} characters long and less than ${constants.maxFirstNameLength}.`,
+    firstNameLengthError: `Field first_name must be at least ${constants.minLastNameLength} characters long and less than ${constants.maxFirstNameLength}.`,
     // eslint-disable-next-line max-len
-    lastNameLengthError: `Field last_name must be at least ${constants.minLastNameLength} characters long and less than ${constants.minFirstNameLength}.`,
+    lastNameLengthError: `Field last_name must be at least ${constants.minLastNameLength} characters long and less than ${constants.maxFirstNameLength}.`,
     emailAlreadyExists: 'Email already registered.'
   },
   responseErrors: {}

@@ -1,9 +1,10 @@
 const { checkSchema, validationResult } = require('express-validator/check');
-// const logger = require('../logger');
+const logger = require('../logger');
 const errors = require('../errors');
 
 // eslint-disable-next-line no-unused-vars
 const checkValidationResult = (request, response, next) => {
+  logger.info('Checking params');
   const errorsResult = validationResult(request);
   if (!errorsResult.isEmpty()) {
     return next(

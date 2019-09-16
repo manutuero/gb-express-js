@@ -1,15 +1,13 @@
-const bcrypt = require('bcrypt');
+const { hashPassword } = require('../helpers');
 
 const logger = require('../../app/logger');
 const db = require('../models');
 const errors = require('../errors');
 
-const saltRounds = 10;
 exports.createUser = (req, res, next) => {
   const newUserData = req.params.user;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const hash = bcrypt.hashSync(newUserData.password, salt);
-  newUserData.password = hash;
+
+  newUserData.password = hashPassword(newUserData.password);
 
   return db.user
     .create(newUserData)
