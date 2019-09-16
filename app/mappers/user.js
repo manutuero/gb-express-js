@@ -5,7 +5,7 @@ exports.mapUserCreateRequest = userToMap => {
     firstName: userToMap.first_name,
     lastName: userToMap.last_name,
     email: userToMap.email,
-    password: hashPassword(userToMap.password);
+    password: hashPassword(userToMap.password)
   };
   return userToCreate;
 };
