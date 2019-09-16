@@ -1,5 +1,5 @@
 const app = require('../server');
-const db = require('../app/models');
+// const db = require('../app/models');
 const supertest = require('supertest');
 const errors = require('../app/errors');
 const { paramsValidationsErrors } = require('../app/constants/errorsMessages');
@@ -58,13 +58,20 @@ describe('Post /users', () => {
   });
 
   it('Fails to create user, user already exists', async done => {
-    await db.user.create(validUser);
+    await request
+      .post('/users')
+      .set('Content-Type', 'application/json')
+      .set('Acccept', 'application/json')
+      .send(validUser);
     const response = await request
       .post('/users')
       .set('Content-Type', 'application/json')
       .set('Acccept', 'application/json')
       .send(validUser);
     expect(response.status).toBe(400);
+    expect(response.body.message.length).toBe(1);
+    expect(response.body.message[0]).toMatchObject(paramsValidationsErrors.emailAlreadyExists);
+    expect(response.body.internal_code).toBe(errors.VALIDATION_ERROR);
     done();
   });
 });
