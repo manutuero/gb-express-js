@@ -9,7 +9,7 @@ exports.createUser = (req, res, next) => {
   const newUserData = mapUserCreateRequest(req.body);
 
   return userDb
-    .userNotExists(newUserData)
+    .findUser(newUserData)
     .then(user => {
       if (user) {
         throw errors.field_validations_failed([paramsValidationsErrors.emailAlreadyExists]);
@@ -17,7 +17,7 @@ exports.createUser = (req, res, next) => {
       return userDb.createUser(newUserData);
     })
     .then(createdUser => {
-      logger.info(`User ${createdUser.dataValues.firstName} was created.`);
+      logger.info(`User ${createdUser.firstName} was created.`);
       const serializedUser = serializeCreatedUser(createdUser);
       return res.status(201).send(serializedUser);
     })

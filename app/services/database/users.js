@@ -1,5 +1,17 @@
 const db = require('../../models');
+const errors = require('../../errors');
+exports.findUser = newUser => {
+  try {
+    return db.user.findOne({ where: { email: newUser.email } });
+  } catch {
+    throw errors.databaseError;
+  }
+};
 
-exports.userNotExists = newUser => db.user.findOne({ where: { email: newUser.email } });
-
-exports.createUser = userToCreate => db.user.create(userToCreate);
+exports.createUser = userToCreate => {
+  try {
+    db.user.create(userToCreate);
+  } catch {
+    throw errors.databaseError;
+  }
+};
