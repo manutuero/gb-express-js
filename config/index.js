@@ -33,6 +33,8 @@ const config = {
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD
     },
+    saltRouds: process.env.SALT_ROUNDS,
+    emailDomain: process.env.EMAIL_DOMAIN,
     api: {
       bodySizeLimit: process.env.API_BODY_SIZE_LIMIT,
       parameterLimit: process.env.API_PARAMETER_LIMIT,
