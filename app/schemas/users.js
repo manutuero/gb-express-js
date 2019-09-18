@@ -8,7 +8,7 @@ exports.signUp = {
     exists: true,
     errorMessage: paramsValidationsErrors.invalidEmail,
     custom: {
-      options: email => email.includes(constants.EMAIL_DOMAIN),
+      options: email => email.includes(process.env.EMAIL_DOMAIN),
       errorMessage: paramsValidationsErrors.invalidDomain
     }
   },
