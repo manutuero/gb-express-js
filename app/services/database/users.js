@@ -10,7 +10,7 @@ exports.findUser = newUser => {
 
 exports.createUser = userToCreate => {
   try {
-    db.user.create(userToCreate);
+    return db.user.create(userToCreate);
   } catch {
     throw errors.databaseError;
   }
