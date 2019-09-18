@@ -1,4 +1,4 @@
-const { serializeCreatedUser } = require('../serializers/errors');
+const { serializeCreatedUser } = require('../serializers/users');
 const { mapUserCreateRequest } = require('../mappers/user');
 const logger = require('../../app/logger');
 const userDb = require('../services/database/users');
