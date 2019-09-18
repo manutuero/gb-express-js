@@ -9,4 +9,3 @@ exports.serializeCreatedUser = createdUser => {
   };
   return serializedUser;
 };
-
