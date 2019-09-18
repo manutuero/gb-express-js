@@ -1,5 +1,6 @@
 const { paramsValidationsErrors } = require('../constants/errorsMessages');
 const constants = require('../constants');
+const config = require('../../config');
 
 exports.signUp = {
   email: {
@@ -8,7 +9,7 @@ exports.signUp = {
     exists: true,
     errorMessage: paramsValidationsErrors.invalidEmail,
     custom: {
-      options: email => email.includes(process.env.EMAIL_DOMAIN),
+      options: email => email.includes(config.common.emailDomain),
       errorMessage: paramsValidationsErrors.invalidDomain
     }
   },
