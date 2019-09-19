@@ -2,7 +2,7 @@ const app = require('../server');
 // const db = require('../app/models');
 const supertest = require('supertest');
 const errors = require('../app/errors');
-const { paramsValidationsErrors } = require('../app/constants/errorsMessages');
+const { paramsValidationsErrors, emailAlreadyExists } = require('../app/constants/errorsMessages');
 
 const validUser = {
   first_name: 'TestName',
@@ -70,7 +70,7 @@ describe('Post /users', () => {
       .send(validUser);
     expect(response.status).toBe(400);
     expect(response.body.message.length).toBe(1);
-    expect(response.body.message[0]).toMatchObject(paramsValidationsErrors.emailAlreadyExists);
+    expect(response.body.message[0]).toMatchObject(emailAlreadyExists);
     expect(response.body.internal_code).toBe(errors.VALIDATION_ERROR);
     done();
   });
