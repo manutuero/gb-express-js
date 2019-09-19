@@ -20,3 +20,6 @@ exports.field_validations_failed = message => internalError(message, exports.VAL
 
 exports.BAD_REQUEST = 'Bad request.';
 exports.bad_request = message => internalError(message, exports.BAD_REQUEST);
+
+exports.EMAIL_REGISTERED_ERROR = 'Email already exists on database';
+exports.email_registered_error = message => internalError(message, exports.EMAIL_REGISTERED_ERROR);
