@@ -3,7 +3,6 @@ const { mapUserCreateRequest } = require('../mappers/user');
 const logger = require('../../app/logger');
 const userDb = require('../services/database/users');
 const errors = require('../errors');
-const { emailAlreadyExists } = require('../constants/errorsMessages');
 
 exports.createUser = (req, res, next) => {
   const newUserData = mapUserCreateRequest(req.body);
@@ -12,7 +11,7 @@ exports.createUser = (req, res, next) => {
     .findUserByEmail(newUserData)
     .then(user => {
       if (user) {
-        throw errors.field_validations_failed([emailAlreadyExists]);
+        throw errors.email_registered_error();
       }
       return userDb.createUser(newUserData);
     })
