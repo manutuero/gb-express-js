@@ -1,6 +1,6 @@
 const db = require('../../models');
 const errors = require('../../errors');
-exports.findUser = newUser => {
+exports.findUserByEmail = newUser => {
   try {
     return db.user.findOne({ where: { email: newUser.email } });
   } catch {

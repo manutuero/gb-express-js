@@ -9,7 +9,7 @@ exports.createUser = (req, res, next) => {
   const newUserData = mapUserCreateRequest(req.body);
 
   return userDb
-    .findUser(newUserData)
+    .findUserByEmail(newUserData)
     .then(user => {
       if (user) {
         throw errors.field_validations_failed([emailAlreadyExists]);
