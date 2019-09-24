@@ -3,7 +3,7 @@ const rp = require('request-promise');
 
 exports.getAlbums = () =>
   rp(`${process.env.ALBUMS_URL}albums`).catch(err => {
-    throw errors.external_api_error(err.message);
+    throw errors.externalApiError(err.message);
   });
 
 exports.getIdAlbumPhotos = id =>
@@ -14,5 +14,5 @@ exports.getIdAlbumPhotos = id =>
     },
     method: 'GET'
   }).catch(err => {
-    throw errors.external_api_error(err.message);
+    throw errors.externalApiError(err.message);
   });

@@ -9,7 +9,7 @@ const checkValidationResult = (request, response, next) => {
   const errorsResult = validationResult(request);
   if (!errorsResult.isEmpty()) {
     return next(
-      errors.field_validations_failed(
+      errors.fieldValidationsFailed(
         errorsResult.array({ onlyFirstError: true }).map(e => serializeParamError(e))
       )
     );

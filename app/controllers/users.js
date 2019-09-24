@@ -11,7 +11,7 @@ exports.createUser = (req, res, next) => {
     .findUserByEmail(newUserData)
     .then(user => {
       if (user) {
-        throw errors.email_registered_error();
+        throw errors.emailRegisteredError();
       }
       return userDb.createUser(newUserData);
     })

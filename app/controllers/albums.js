@@ -24,7 +24,7 @@ exports.getPhotosByAlbumId = (req, res, next) => {
         return res.status(200).send(albumsById);
       }
       logger.error('Get albums Id returned empty');
-      throw errors.not_found_error(`No album found with id: ${req.params.id}`);
+      throw errors.notFoundError(`No album found with id: ${req.params.id}`);
     })
     .catch(err => {
       logger.error('There was an error retrieving photos from external api');
