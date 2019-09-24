@@ -12,3 +12,4 @@ Promise.resolve()
     logger.info(`Listening on port: ${port}`);
   })
   .catch();
+module.exports = app;
