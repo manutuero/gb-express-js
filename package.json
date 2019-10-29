@@ -58,7 +58,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",
-    "sequelize": "^4.34.0",
+    "sequelize": "^5.15.1",
     "pg": "^7.4.1",
     "umzug": "^2.1.0",
     "express-wolox-logger": "0.0.2"
