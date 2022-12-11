@@ -56,7 +56,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "jwt-simple": "^0.5.1",
     "sequelize": "^4.34.0",
     "pg": "^7.4.1",
